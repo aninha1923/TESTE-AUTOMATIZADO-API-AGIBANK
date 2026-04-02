@@ -117,4 +117,3 @@ O pipeline executa os testes, gera os resultados e pode ser configurado para pub
 4. **Timeouts Otimizados:** Configurações globais para lidar com variações de performance da API.
 
 ---
-Desenvolvido por [Seu Nome] - 2026
