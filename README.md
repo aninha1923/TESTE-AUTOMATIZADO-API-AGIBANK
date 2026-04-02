@@ -9,7 +9,7 @@ Este projeto consiste em um framework de automação de testes para a [Dog CEO A
 - **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
 - **Framework de Testes:** [Playwright](https://playwright.dev/)
 - **Relatórios:** [Allure Report](https://allurereport.org/)
-- **CI/CD:** [GitHub Actions](https://github.com/features/actions)
+- **CI:** [GitHub Actions](https://github.com/features/actions)
 - **Outros:** Dotenv (Gerenciamento de ambiente), FS/Path (Manipulação de arquivos)
 
 ---
