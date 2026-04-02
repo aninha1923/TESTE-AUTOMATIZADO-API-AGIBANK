@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { DogController } from './dog.controller';
-import { DogHelper } from './dog.helper';
+import { DogController } from './dog-api/dog';
+import { DogHelper } from './dog-api/utils/dog.helper';
 import * as fs from 'fs';
 import * as path from 'path';
 
