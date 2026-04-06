@@ -1,2 +1,0 @@
-✅ URL da imagem capturada: https://images.dog.ceo/breeds/spaniel-cocker/murphy.jpg
-✅ Imagem salva em: C:\Users\anaab\OneDrive\Documentos\API - Agibank\API\test-images\dog-image-2026-04-01T23-13-28-436Z.jpg

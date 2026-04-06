@@ -1,6 +1,6 @@
-# 🐕 Dog API - Automação de Testes de API
+# 🐕 Dog API - Automação de Testes de API (Clean Code & Allure)
 
-Este projeto consiste em um framework de automação de testes para a [Dog CEO API](https://dog.ceo/dog-api/), desenvolvido com **Playwright** e **TypeScript**. O objetivo é garantir a qualidade e a disponibilidade dos endpoints de raças de cães, utilizando padrões de projeto como Controllers e Helpers para uma estrutura escalável e de fácil manutenção.
+Este projeto é um framework de automação de testes para a [Dog CEO API](https://dog.ceo/dog-api/), desenvolvido com **Playwright**, **TypeScript** e **Allure Report**. O foco principal é demonstrar padrões de **Código Limpo (Clean Code)**, separação de responsabilidades e relatórios de testes profissionais com evidências visuais e tratamento de erros.
 
 ---
 
@@ -8,28 +8,20 @@ Este projeto consiste em um framework de automação de testes para a [Dog CEO A
 
 - **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
 - **Framework de Testes:** [Playwright](https://playwright.dev/)
-- **Relatórios:** [Allure Report](https://allurereport.org/)
-- **CI:** [GitHub Actions](https://github.com/features/actions)
-- **Outros:** Dotenv (Gerenciamento de ambiente), FS/Path (Manipulação de arquivos)
+- **Relatórios Profissionais:** [Allure Report](https://allurereport.org/) (utilizando `allure-js-commons` v3)
+- **CI:** [GitHub Actions](https://github.com/features/actions) com deploy automático no **GitHub Pages**
+- **Gestão de Ambiente:** [Dotenv](https://www.npmjs.com/package/dotenv)
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📁 Estrutura do Projeto (Padrões Adotados)
 
-O projeto segue uma organização modular para separar responsabilidades:
+O projeto segue uma arquitetura modular para garantir escalabilidade e fácil manutenção:
 
-```text
-├── .github/workflows/      # Configuração do Pipeline (CI/CD)
-├── allure-results/         # Resultados brutos do Allure (gerado pós-teste)
-├── test-images/            # Imagens de cães baixadas durante os testes
-├── tests/
-│   ├── dog-api.spec.ts     # Suítes de testes automatizados
-│   ├── dog.controller.ts   # Abstração das chamadas HTTP (Request Layer)
-│   ├── dog.helper.ts       # Validações, asserts e lógica de apoio
-├── .env                    # Variáveis de ambiente (não versionado)
-├── playwright.config.ts    # Configurações globais do Playwright
-└── package.json            # Scripts e dependências
-```
+- **`tests/dog-api/dog.ts` (Controller)**: Camada de abstração das chamadas HTTP. Centraliza os endpoints e métodos de requisição.
+- **`tests/dog-api/utils/dog.helper.ts` (Helper)**: Camada de lógica e validação. Contém asserts customizados, tratamento de erros e anexos do Allure.
+- **`tests/dog-api.spec.ts` (Specs)**: Camada de testes declarativa. Foca no fluxo de negócio (Arrange, Act, Assert) sem poluição de lógica técnica.
+- **`test-images/`**: Armazena as evidências visuais (imagens de cães) baixadas durante a execução dos testes.
 
 ---
 
@@ -37,18 +29,19 @@ O projeto segue uma organização modular para separar responsabilidades:
 
 ### 1. Pré-requisitos
 - [Node.js](https://nodejs.org/) (v18 ou superior)
-- [NPM](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
+- [NPM](https://www.npmjs.com/)
 
 ### 2. Instalação
-Clone o repositório e instale as dependências:
 ```bash
+# Clone o repositório
 git clone <url-do-repositorio>
-cd api-dog
+
+# Entre na pasta e instale as dependências
 npm install
 ```
 
-### 3. Configuração
-Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis (conforme `playwright.config.ts`):
+### 3. Configuração de Ambiente (.env)
+Crie um arquivo `.env` na raiz do projeto:
 ```env
 URL_PADRAO=https://dog.ceo/api
 URL_RANDOM=https://dog.ceo/api/breeds
@@ -57,63 +50,47 @@ RACA_DOG=affenpinscher
 
 ---
 
-## 🧪 Executando os Testes
+## 🧪 Cenários de Teste Implementados
 
-Você pode executar os testes utilizando os scripts configurados no `package.json`:
+O projeto cobre 4 cenários fundamentais, demonstrando diferentes validações:
+
+1.  **Cenário 1: Consulta de Imagem por Raça**: Valida o sucesso (200 OK) e se a URL retornada pertence à raça configurada no `.env`.
+2.  **Cenário 2: Listagem de Todas as Raças**: Garante que a API retorna a lista completa e íntegra de todas as raças de cães.
+3.  **Cenário 3: Captura e Evidência Visual**: Realiza a consulta de uma imagem aleatória geral, faz o download do arquivo e **anexa a foto do cachorro diretamente no relatório Allure**.
+4.  **Cenário 4: Falha no Filtro (Retorno Tratado)**: Um cenário de **falha proposital** que demonstra como o framework captura um erro 404 (raça inexistente) e gera um "retorno tratado" no Allure, exibindo o motivo da falha e o JSON de erro da API.
+
+---
+
+## 📊 Relatórios Allure
+
+Os relatórios são ricos em detalhes, incluindo passos (steps), severidade, labels e anexos.
 
 ```bash
-# Executar todos os testes em modo headless
-npm run test:e2e
+# Executar testes e gerar relatório HTML único
+npx playwright test
+npm run allure:generate:html
 
-# Executar testes com a interface visual do Playwright
-npx playwright test --ui
-
-# Executar um teste específico
-npx playwright test tests/dog-api.spec.ts
+# Abrir o relatório gerado
+npm run allure:open
 ```
 
 ---
 
-## 📊 Relatórios com Allure
+## ⚙️ Pipeline CI/CD
 
-O projeto está integrado ao Allure para fornecer relatórios detalhados e visuais.
-
-1. **Gerar e abrir o relatório temporário:**
-   ```bash
-   npm run allure:serve
-   ```
-
-2. **Gerar o relatório estático (HTML):**
-   ```bash
-   npm run allure:generate:html
-   npm run allure:open
-   ```
+O workflow no GitHub Actions (`playwright.yml`) automatiza todo o processo:
+1.  Instala dependências e browsers.
+2.  Executa os testes (mesmo que o Cenário 4 falhe, o pipeline continua para gerar o relatório).
+3.  Gera o histórico de execuções do Allure.
+4.  **Publica o relatório no GitHub Pages**: O link do relatório fica disponível na branch `gh-pages` do seu repositório.
 
 ---
 
-## ⚙️ CI/CD (GitHub Actions)
+## 🤝 Boas Práticas de Código Limpo (Clean Code)
 
-O projeto possui um workflow configurado (`.github/workflows/playwright.yml`) que é disparado automaticamente em:
-- **Push** na branch `main`.
-- **Pull Requests** para a branch `main`.
-
-O pipeline executa os testes, gera os resultados e pode ser configurado para publicar o Allure Report.
-
----
-
-## 📝 Cenários de Teste Cobertos
-
-- **Consulta de Raça Específica:** Valida o status code, a estrutura da resposta e se a URL da imagem condiz com a raça solicitada.
-- **Listagem de Todas as Raças:** Garante que a lista completa está sendo retornada e valida a existência de raças específicas.
-- **Imagem Aleatória:** Valida a captura de imagens aleatórias e o download do arquivo para a pasta `test-images/`.
-
----
-
-## 🤝 Boas Práticas Adotadas
-
-1. **Controller Pattern:** Centraliza as requisições, facilitando alterações de endpoints em um único lugar.
-2. **Helpers:** Isola a lógica de validação (Schema/Asserts), mantendo o arquivo de teste limpo e legível.
-3. **Gerenciamento de Evidências:** Armazenamento automático de imagens capturadas para auditoria visual.
-4. **Timeouts Otimizados:** Configurações globais para lidar com variações de performance da API.
+- **DRY (Don't Repeat Yourself)**: Validações de status e corpo da resposta centralizadas no Helper.
+- **Separation of Concerns**: Testes não sabem *como* a requisição é feita, apenas *o que* deve ser testado.
+- **Nomes Semânticos**: Métodos e variáveis com nomes claros que descrevem sua intenção.
+- **Tratamento de Erros Amigável**: Falhas de validação geram mensagens claras (`FALHA NO FILTRO`) em vez de stacks técnicos complexos.
 
 ---
