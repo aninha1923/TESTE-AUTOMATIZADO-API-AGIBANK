@@ -7,10 +7,10 @@
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "tsc",
     "start": "node dist/app.js",
-    "allure:generate": "allure generate allure-results --clean",
-    "allure:generate:html": "allure generate allure-results --clean --output allure-report --single-file",
+    "allure:generate": "allure generate allure-results --output allure-report",
+    "allure:generate:html": "allure generate allure-results --output allure-report",
     "allure:open": "allure open allure-report",
-    "allure:serve": "allure serve allure-results"
+    "allure:serve": "allure generate allure-results --open"
   },
   "dependencies": {
     "dotenv": "^17.2.2",
@@ -25,6 +25,7 @@
     "@types/jest": "^29.5.4",
     "@types/node": "^24.3.1",
     "@types/pg": "^8.15.5",
+    "allure": "3.3.1",
     "allure-js-commons": "^3.3.3",
     "allure-mocha": "^3.4.1",
     "allure-playwright": "^3.3.3",

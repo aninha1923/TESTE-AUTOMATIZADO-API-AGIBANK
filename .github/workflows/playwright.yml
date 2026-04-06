@@ -60,7 +60,7 @@ jobs:
         allure_results: allure-results
         allure_history: allure-history
         keep_reports: 20
-        allure_version: 2.32.0
+        allure_version: 3.3.1
 
     - name: Deploy report to Github Pages
       if: always()
