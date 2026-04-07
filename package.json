@@ -8,8 +8,8 @@
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "tsc",
     "start": "node dist/app.js",
-    "allure:generate": "allure generate allure-results --output allure-report",
-    "allure:generate:html": "allure generate allure-results --output allure-report",
+    "allure:generate": "allure generate allure-results --clean --single-file --output allure-report",
+    "allure:generate:html": "allure generate allure-results --clean --single-file --output allure-report",
     "allure:open": "allure open allure-report",
     "allure:serve": "allure generate allure-results --open"
   },
@@ -27,6 +27,7 @@
     "@types/node": "^24.3.1",
     "@types/pg": "^8.15.5",
     "allure": "3.3.1",
+    "allure-commandline": "^2.38.1",
     "allure-js-commons": "^3.3.3",
     "allure-mocha": "^3.4.1",
     "allure-playwright": "^3.3.3",
