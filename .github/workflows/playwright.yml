@@ -25,6 +25,9 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Install Allure CLI
+      run: npm install -g allure-commandline
+
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
@@ -37,37 +40,22 @@ jobs:
     - name: Run Playwright tests
       run: npm run test:e2e || true
 
-    - name: Generate Allure Report
+    - name: Generate Single HTML Report
       if: always()
       run: npm run allure:generate
 
-    - name: Upload Allure Results Artifact
+    - name: Upload Allure Report Artifact
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: allure-results
-        path: allure-results
+        name: allure-report-single-file
+        path: allure-report/index.html
         retention-days: 10
-
-    - name: Get Allure history
-      uses: actions/checkout@v4
-      if: always()
-      continue-on-error: true
-      with:
-        ref: gh-pages
-        path: gh-pages
-
-    - name: Allure Report action
-      uses: simple-elf/allure-report-action@v1.9
-      if: always()
-      with:
-        allure_results: allure-results
-            
 
     - name: Deploy report to Github Pages
       if: always()
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: allure-history
+        publish_dir: allure-report
         publish_branch: gh-pages
