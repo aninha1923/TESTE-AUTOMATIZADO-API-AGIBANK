@@ -54,19 +54,22 @@ export default defineConfig({
       },
     }
   ],
-  reporter: [
-    ['allure-playwright', {
-      detail: true,
-      outputFolder:'allure-results',
-      suiteTitle: false,
-      environmentInfo: {
-        framework: 'Playwright',
-        language: 'TypeScript',
-        runtime: 'Node.js',
-        project: 'Consignado',
-        system: 'Blog Agibank'
-      }
-    }],
-    ['junit', { outputFile: 'test-results/results.xml' }]
-  ]
+  reporter: process.env.CI
+    ? [['list'], ['junit', { outputFile: 'test-results/results.xml' }]]
+    : [
+        ['list'],
+        ['allure-playwright', {
+          detail: true,
+          outputFolder:'allure-results',
+          suiteTitle: false,
+          environmentInfo: {
+            framework: 'Playwright',
+            language: 'TypeScript',
+            runtime: 'Node.js',
+            project: 'Consignado',
+            system: 'Blog Agibank'
+          }
+        }],
+        ['junit', { outputFile: 'test-results/results.xml' }]
+      ]
 });
