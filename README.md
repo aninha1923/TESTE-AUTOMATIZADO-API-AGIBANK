@@ -18,9 +18,11 @@ Este projeto é um framework de automação de testes para a [Dog CEO API](https
 
 O projeto segue uma arquitetura modular para garantir escalabilidade e fácil manutenção:
 
-- **`tests/dog-api/dog.ts` (Controller)**: Camada de abstração das chamadas HTTP. Centraliza os endpoints e métodos de requisição.
-- **`tests/dog-api/utils/dog.helper.ts` (Helper)**: Camada de lógica e validação. Contém asserts customizados, tratamento de erros e anexos do Allure.
-- **`tests/dog-api.spec.ts` (Specs)**: Camada de testes declarativa. Foca no fluxo de negócio (Arrange, Act, Assert) sem poluição de lógica técnica.
+- **`tests/dog-api/support/dog-controller.ts`**: Camada de abstração das chamadas HTTP. Centraliza os endpoints e métodos de requisição.
+- **`tests/dog-api/utils/dog-validator.ts`**: Camada de validação. Contém asserts customizados e lógica de validação de dados.
+- **`tests/dog-api/steps/dog.steps.ts`**: Implementação dos passos de teste, mantendo a lógica de execução separada da definição do teste.
+- **`tests/dog-api/features/dog-images.spec.ts`**: Camada de testes declarativa utilizando Playwright. Foca no fluxo de negócio.
+- **`tests/dog-api/services/image-storage.ts`**: Serviço responsável pelo download e armazenamento das imagens de evidência.
 - **`test-images/`**: Armazena as evidências visuais (imagens de cães) baixadas durante a execução dos testes.
 
 ---

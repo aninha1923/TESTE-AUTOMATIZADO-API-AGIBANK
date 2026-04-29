@@ -66,8 +66,8 @@ export default defineConfig({
             framework: 'Playwright',
             language: 'TypeScript',
             runtime: 'Node.js',
-            project: 'Consignado',
-            system: 'Blog Agibank'
+            project: 'API Dog',
+            system: 'Dog'
           }
         }],
         ['junit', { outputFile: 'test-results/results.xml' }]
