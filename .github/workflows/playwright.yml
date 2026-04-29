@@ -1,4 +1,5 @@
 name: Playwright Tests
+
 on:
   push:
     branches: [ main, develop ]
@@ -14,6 +15,7 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v4
 
@@ -37,22 +39,18 @@ jobs:
         echo "URL_RANDOM=${{ secrets.URL_RANDOM }}" >> .env
         echo "RACA_DOG=${{ secrets.RACA_DOG }}" >> .env
 
-    - name: Run Playwright tests
-      run: npm run test:e2e || true
-
-    - name: Generate Single HTML Report
-      if: always()
-      run: npm run allure:generate
+    - name: Run tests + generate report
+      run: npm run test:ci
 
     - name: Upload Allure Report Artifact
-      uses: actions/upload-artifact@v4
       if: always()
+      uses: actions/upload-artifact@v4
       with:
-        name: allure-report-single-file
-        path: allure-report/index.html
+        name: allure-report
+        path: allure-report
         retention-days: 10
 
-    - name: Deploy report to Github Pages
+    - name: Deploy report to GitHub Pages
       if: always()
       uses: peaceiris/actions-gh-pages@v3
       with:
