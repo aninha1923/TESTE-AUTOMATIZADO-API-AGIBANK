@@ -1,8 +1,8 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","599","Cenário: Consultar imagem aleatória por raça com sucesso","Dog CEO","2026-04-30","passed","2026-04-30","Dog CEO API - Feature: Consulta de Imagens (BDD)","Regressão de API","",""
-"### ✅ Imagem Persistida
-- **Arquivo:** dog-image-2026-04-30T22-35-55-648Z.jpg
-- [Ver Online](https://images.dog.ceo/breeds/otterhound/n02091635_1808.jpg)","272","Cenário: Persistir evidência de imagem aleatória geral","Dog CEO","2026-04-30","passed","2026-04-30","Dog CEO API - Feature: Consulta de Imagens (BDD)","Regressão de API","",""
 "","114","Cenário: Erro ao consultar raça não existente","Dog CEO","2026-04-30","failed","2026-04-30","Dog CEO API - Feature: Consulta de Imagens (BDD)","Regressão de API","",""
+"### ✅ Imagem Persistida
+- **Arquivo:** dog-image-2026-04-30T23-13-16-409Z.jpg
+- [Ver Online](https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3291.jpg)","381","Cenário: Persistir evidência de imagem aleatória geral","Dog CEO","2026-04-30","passed","2026-04-30","Dog CEO API - Feature: Consulta de Imagens (BDD)","Regressão de API","",""
 "### ✅ Listagem Validada
-- **Total de raças:** 108","115","Cenário: Validar inventário completo de raças","Dog CEO","2026-04-30","passed","2026-04-30","Dog CEO API - Feature: Consulta de Imagens (BDD)","Regressão de API","",""
+- **Total de raças:** 108","126","Cenário: Validar inventário completo de raças","Dog CEO","2026-04-30","passed","2026-04-30","Dog CEO API - Feature: Consulta de Imagens (BDD)","Regressão de API","",""
+"","630","Cenário: Consultar imagem aleatória por raça com sucesso","Dog CEO","2026-04-30","passed","2026-04-30","Dog CEO API - Feature: Consulta de Imagens (BDD)","Regressão de API","",""
