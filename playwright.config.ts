@@ -54,22 +54,20 @@ export default defineConfig({
       },
     }
   ],
-  reporter: process.env.CI
-    ? [['list'], ['junit', { outputFile: 'test-results/results.xml' }]]
-    : [
-        ['list'],
-        ['allure-playwright', {
-          detail: true,
-          outputFolder:'allure-results',
-          suiteTitle: false,
-          environmentInfo: {
-            framework: 'Playwright',
-            language: 'TypeScript',
-            runtime: 'Node.js',
-            project: 'API Dog',
-            system: 'Dog'
-          }
-        }],
-        ['junit', { outputFile: 'test-results/results.xml' }]
-      ]
+  reporter: [
+    ['list'],
+    ['allure-playwright', {
+      detail: true,
+      outputFolder: 'allure-results',
+      suiteTitle: false,
+      environmentInfo: {
+        framework: 'Playwright',
+        language: 'TypeScript',
+        runtime: 'Node.js',
+        project: 'API Dog',
+        system: 'Dog'
+      }
+    }],
+    ['junit', { outputFile: 'test-results/results.xml' }]
+  ]
 });
